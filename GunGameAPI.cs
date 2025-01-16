@@ -11,11 +11,13 @@ public interface IAPI
     event Action<LevelChangeEventArgs> LevelChangeEvent;
     event Action<PointChangeEventArgs> PointChangeEvent;
     event Action<WeaponFragEventArgs> WeaponFragEvent;
+    event Action<RespawnPlayerEventArgs> RespawnPlayerEvent; 
     event Action RestartEvent;
     public int GetMaxLevel();
     public int GetPlayerLevel(int slot);
     public int GetMaxCurrentLevel();
     public bool IsWarmupInProgress();
+    public void RespawnPlayer(int slot);
 }
 public class WinnerEventArgs : EventArgs
 {
@@ -88,6 +90,16 @@ public class WeaponFragEventArgs : EventArgs
     {
         Killer = killer;
         Weapon = weapon;
+        Result = true;
+    }
+}
+public class RespawnPlayerEventArgs : EventArgs
+{
+    public int Slot { get; }
+    public bool Result { get; set; }
+    public RespawnPlayerEventArgs(int slot)
+    {
+        Slot = slot;
         Result = true;
     }
 }
